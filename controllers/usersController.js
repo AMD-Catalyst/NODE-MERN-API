@@ -25,7 +25,9 @@ const createUser = async (req, res) => {
     .exec();
 
   if (duplicate) {
-    return res.status(409).json({ message: "Duplicate username" });
+    return res
+      .status(409)
+      .json({ message: `Username '${username}' already exist` });
   }
 
   //Hash password
@@ -74,7 +76,9 @@ const updateUser = async (req, res) => {
 
   //allow original user
   if (duplicate && duplicate?._id.toString() !== id) {
-    return res.status(409).json({ message: "Duplicate Username" });
+    return res
+      .status(409)
+      .json({ message: `Username '${username}' already exist` });
   }
 
   user.username = username;
